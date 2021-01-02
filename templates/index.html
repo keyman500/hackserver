@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Flask Template</title>
+    <style>
+      form {
+        margin: 0 auto;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      input {
+        font-size: 28px;
+        margin-top: 20px;
+      }
+    </style>
+	</head>
+	<body>
+	
+			<input type="text" placeholder="username" name="username"></input>
+			<input type="button" onclick="getCount()" value="go to your page"></input>
+
+<button>hi</button>
+	</body>
+    <script>
+        //function MUST be declared async
+async function getData(url){
+   try{
+     let response = await fetch(url);//1. Send http request and get response
+     console.log(response)
+     let result = await response.json();//2. Get data from response
+     console.log(result);
+    // drawTable(result);// 3. Do something with the data
+  }catch(e){
+      console.log(e);//catch and log any errors
+  }
+}
+
+getData("https://FreeLumpyElements.keyman500.repl.co/test")
+document.onkeypess = function(evt){
+    console.log("ok");
+}
+    function getchat() {
+
+        // GET ALL THE INPUT ELEMENTS.
+        var ele = document.getElementsByTagName('input');
+
+        // LOOP THROUGH EACH ELEMENT.
+        for (i = 0; i < ele.length; i++) {
+
+            // CHECK THE ELEMENT TYPE.
+            if (ele[i].type == 'text') {
+                console.log('Value: ' + ele[i].value);
+            }
+        }
+    }    
+    document.addEventListener('keypress', function (e) {
+        postData("https://FreeLumpyElements.keyman500.repl.co/getit",{"ho":"nonon"})
+    })
+
+
+    async function postData(url, data){
+  try{
+
+     let response = await fetch(
+       url, 
+       {
+            method: 'POST',
+            body: JSON.stringify(data),//convert data to JSON string
+          headers: { 'Content-Type':'application/json' }// JSON data
+       },
+     );//1. Send http request and get response
+     
+     let result = await response.text();//2. Get message from response
+     console.log(result);//3. Do something with the message
+   
+   }catch(error){
+     console.log(error);//catch and log any errors
+   }
+}
+    </script>
+</html>
